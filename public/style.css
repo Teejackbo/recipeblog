@@ -528,7 +528,8 @@ label {
 
 input, textarea {
   font-family: Montserrat;
-  border: 1px solid #0c966c;
+  border: 1.5px solid #0c966c;
+  border-radius: 5px;
   font-size: 1em;
   padding: 0.3em; }
 
