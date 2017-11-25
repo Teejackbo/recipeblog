@@ -10,7 +10,11 @@
         <p>{{ recipe.description }}</p>
         <div class="mt-2">
           <a href="/recipes/{{recipe.id}}" class="btn btn-go mr-2">Read</a>
-          <a href="/recipes/delete/{{recipe.id}}" class="btn btn-dg">Delete</a>
+          <form action="{{ '/recipes/' + recipe.id + '?_method=DELETE' }}" method="POST" class="btn-container">
+            {{ csrfField() }}
+            <button type="submit" class="btn btn-dg text-link">Delete</button>
+          </form>
+          {{--  <a href="/recipes/delete/{{recipe.id}}" class="btn btn-dg">Delete</a>  --}}
         </div>
       </div>
     @endeach

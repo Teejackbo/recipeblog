@@ -20,6 +20,13 @@ class RecipeController {
       recipe: recipe.toJSON()
     })
   }
+
+  async destroy({ params, response, session }) {
+    const recipe = await Recipe.find(params.id)
+    await recipe.delete()
+    session.flash({ notification: 'Recipe deleted.' })
+    return response.redirect('/recipes')
+  }
 }
 
 module.exports = RecipeController
