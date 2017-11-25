@@ -14,9 +14,11 @@
             {{ csrfField() }}
             <button type="submit" class="btn btn-dg text-link">Delete</button>
           </form>
-          {{--  <a href="/recipes/delete/{{recipe.id}}" class="btn btn-dg">Delete</a>  --}}
         </div>
       </div>
     @endeach
+    @if(old('notification'))
+      <div class="alert alert-go text-para mtb-1">{{ old('notification') }}</div>
+    @endif
   @endunless
 @endsection

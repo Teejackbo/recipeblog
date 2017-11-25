@@ -2,6 +2,8 @@
 
 const Recipe = use('App/Models/Recipe')
 
+const { validate } = use('Validator')
+
 class RecipeController {
 
   async index({ view }) {
@@ -19,6 +21,36 @@ class RecipeController {
       pageTitle: recipe.title,
       recipe: recipe.toJSON()
     })
+  }
+
+  async add({ view }) {
+    return view.render('recipes.add', {
+      pageTitle: 'Add a Recipe'
+    })
+  }
+
+  async store({ request, response, session }) {
+    const validation = await validate(request.all(), {
+      title: 'required|min:3|max:50',
+      description: 'required|min:3|max:800',
+      body: 'required|min:10'
+    })
+
+    if (validation.fails()) {
+      session.withErrors(validation.messages()).flashAll()
+      return response.redirect('back')
+    }
+
+    const recipe = new Recipe();
+    recipe.title = request.input('title')
+    recipe.description = request.input('description')
+    recipe.body = request.input('body')
+
+    await recipe.save()
+
+    session.flash({ notification: 'Recipe saved.' })
+
+    return response.redirect('/recipes')
   }
 
   async destroy({ params, response, session }) {

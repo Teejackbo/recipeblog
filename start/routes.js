@@ -17,5 +17,7 @@ const Route = use('Route')
 
 Route.on('/').render('home')
 Route.get('/recipes', 'RecipeController.index')
+Route.get('/recipes/add', 'RecipeController.add')
 Route.get('/recipes/:id', 'RecipeController.read')
 Route.delete('/recipes/:id', 'RecipeController.destroy')
+Route.post('/recipes', 'RecipeController.store')

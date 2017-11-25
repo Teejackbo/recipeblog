@@ -1,0 +1,26 @@
+@layout('main')
+
+@section('content')
+  <h2 class="mt-1">Add Recipe</h2>
+  <form action="/recipes" method="POST">
+    {{ csrfField() }}
+    <div class="form-field bb-prim-1 ptb-1">
+      <label class="mb-1">Title</label>
+      <input type="text" name="title" placeholder="Enter the title." value="{{ old('title', '') }}">
+      {{ elIf('<div class="alert alert-dg text-para mt-1">$self</div>', getErrorFor('title'), hasErrorFor('title')) }}
+    </div>
+    <div class="form-field bb-prim-1 ptb-1">
+      <label class="mb-1">Description</label>
+      <textarea name="description" placeholder="Enter a brief description of your recipe.">{{ old('description', '') }}</textarea>
+      {{ elIf('<div class="alert alert-dg text-para mt-1">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
+    </div>
+    <div class="form-field ptb-1">
+      <label class="mb-1">Body</label>
+      <textarea name="body" placeholder="Write your recipe.">{{ old('body', '') }}</textarea>
+      {{ elIf('<div class="alert alert-dg text-para mt-1">$self</div>', getErrorFor('body'), hasErrorFor('body')) }}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-go text-link">Submit</button>
+    </div>
+  </form>
+@endsection
