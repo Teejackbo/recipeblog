@@ -1,0 +1,18 @@
+@layout('main')
+
+@section('content')
+  @unless(recipes[0])
+    <h2 class="mt-1">No recipes added.</h2>
+  @else
+    @each(recipe in recipes)
+      <div class="recipe-post ptb-2">
+        <h2 class="mb-1">{{ recipe.title }}</h2>
+        <p>{{ recipe.description }}</p>
+        <div class="mt-2">
+          <a href="/recipes/{{recipe.id}}" class="btn btn-go mr-2">Read</a>
+          <a href="/recipes/delete/{{recipe.id}}" class="btn btn-dg">Delete</a>
+        </div>
+      </div>
+    @endeach
+  @endunless
+@endsection
